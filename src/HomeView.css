@@ -1,0 +1,55 @@
+.home {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.body {
+  min-height: 740px;
+  transform: rotate(180deg);
+}
+.messages-container {
+  transform: rotate(180deg);
+}
+.messenger-block {
+  border: 1px solid black;
+  width: 350px;
+  height: 800px;
+  overflow: auto;
+}
+.top-bar {
+  height: 10px;
+  background-color: blueviolet;
+}
+.bottom-bar {
+  height: 50px;
+  background-color: blueviolet;
+}
+input {
+  width: 220px;
+  height: 25px;
+  border-radius: 18px;
+  border: 0;
+  margin-top: 10px;
+  padding: 3px 7px;
+}
+input:focus {
+  outline: none;
+}
+button {
+  border: 0;
+  border-radius: 15px;
+  background-color: white;
+  padding: 5px 15px;
+}
+.message-item {
+  box-sizing: border-box;
+  text-align: start;
+  padding: 10px;
+  width: 70%;
+  min-height: 40px;
+  margin: 0 5px;
+  background-color: rgb(209, 209, 209);
+  border-radius: 10px;
+}
