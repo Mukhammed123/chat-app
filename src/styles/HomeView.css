@@ -8,6 +8,7 @@
 .body {
   min-height: 740px;
   transform: rotate(180deg);
+  padding: 0 10px;
 }
 .messages-container {
   transform: rotate(180deg);
@@ -39,7 +40,6 @@ input:focus {
 }
 .message-sender {
   text-align: start;
-  padding-left: 10px;
   padding-bottom: 5px;
 }
 .send-button {
@@ -54,10 +54,21 @@ input:focus {
   padding: 10px;
   width: 70%;
   min-height: 40px;
-  margin: 0 5px;
   background-color: rgb(209, 209, 209);
   border-radius: 10px;
 }
 .message-content {
   display: flex;
+  justify-content: flex-start;
+}
+.user-sent {
+  justify-content: flex-end;
+  background-color: rgb(159, 87, 227);
+}
+.message-time {
+  position: absolute;
+  top: 0;
+}
+.message-block {
+  position: relative;
 }

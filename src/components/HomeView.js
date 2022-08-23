@@ -16,8 +16,9 @@ class HomeView extends Component {
   }
   addMessage = () => {
     if(this.state.message.length > 0) {
+      const time = new Date().toLocaleTimeString().split(' ')
       const arr = this.state.currentMessages;
-      arr.push({user: this.state.name, message: this.state.message});
+      arr.push({user: this.state.name, message: this.state.message, sent_at: `${time[1]} ${time[0]}`});
       this.setState({
         message: ''
       });
@@ -59,8 +60,9 @@ class HomeView extends Component {
                       >
                         <div className="message-sender" style={{textAlign: data.user === this.state.name ? 'end' : 'start'}}>{data.user}</div>
                         <div className='message-content' style={{justifyContent: data.user === this.state.name ? 'flex-end' : 'flex-start'}}>
-                          <div className="message-item" style={{textAlign: data.user === this.state.name ? 'end' : 'start'}}>{data.message}</div>
+                          <div className={`message-item ${data.user === this.state.name ? 'user-sent' : ''}`}>{data.message}</div>
                         </div>
+                        <span className='message-time'>{data.sent_at}</span>
                       </div>
                       )
                     : null
