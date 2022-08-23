@@ -1,9 +1,11 @@
-import '../HomeView.css';
+import '../styles/HomeView.css';
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 
 
 class HomeView extends Component {
   state = {
+    name: null,
     message: '',
     currentMessages: []
   }
@@ -27,10 +29,15 @@ class HomeView extends Component {
     }
   }
   componentDidMount() {
-    const localStData = localStorage.getItem('messages');
-    console.log(localStData)
-    const temp = JSON.parse(JSON.stringify(localStData));
-    console.log(temp)
+    const sessionData = sessionStorage.getItem('user');
+    if(!sessionData) this.props.history.push('/login');
+    else {
+      this.setState({
+        name: sessionData
+      });
+      const localStData = localStorage.getItem('messages');
+      const temp = JSON.parse(JSON.stringify(localStData));
+    }
   }
   render() {
     return (
@@ -46,7 +53,8 @@ class HomeView extends Component {
               </div>
             </div>
             <div className='bottom-bar'>
-              <input type="text" value={this.state.message} onChange={this.inputMessage}/> <button onClick={this.addMessage}>Send</button>
+              <input type="text" className='input-message' value={this.state.message} onChange={this.inputMessage}/>
+              <button className='send-button' onClick={this.addMessage}>Send</button>
             </div>
           </div>
         </div>
@@ -55,4 +63,4 @@ class HomeView extends Component {
   }
 }
 
-export default HomeView;
+export default withRouter(HomeView);

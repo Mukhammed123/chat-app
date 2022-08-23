@@ -1,0 +1,19 @@
+.name-input {
+  width: 300px;
+  height: 45px;
+  box-sizing: border-box;
+  border-radius: 30px;
+  padding: 5px 10px 5px 15px;
+  font-size: 18px;
+}
+.join-btn {
+  padding: 10px 20px;
+  border-radius: 20px;
+  margin: 0 10px;
+}
+.join-room {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
