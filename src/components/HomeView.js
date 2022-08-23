@@ -53,10 +53,16 @@ class HomeView extends Component {
               <div className='messages-container'>
                 {
                   Array.isArray(this.state.currentMessages) ?
-                    this.state.currentMessages.map((data, index) => <div key={index} className="message-block">
-                        <div className="message-sender">{data.user}</div>
-                        <div className="message-item">{data.message}</div>
-                      </div>)
+                    this.state.currentMessages.map((data, index) => <div 
+                        key={index} 
+                        className="message-block"
+                      >
+                        <div className="message-sender" style={{textAlign: data.user === this.state.name ? 'end' : 'start'}}>{data.user}</div>
+                        <div className='message-content' style={{justifyContent: data.user === this.state.name ? 'flex-end' : 'flex-start'}}>
+                          <div className="message-item" style={{textAlign: data.user === this.state.name ? 'end' : 'start'}}>{data.message}</div>
+                        </div>
+                      </div>
+                      )
                     : null
                 }
               </div>
