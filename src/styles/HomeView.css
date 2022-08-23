@@ -7,6 +7,12 @@
 #body-container {
   height: 743px;
   overflow: auto;
+  position: relative;
+}
+.load-more-container {
+  position: absolute;
+  top: 0;
+  left: 70px;
 }
 .body {
   min-height: 740px;
