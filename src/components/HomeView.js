@@ -16,27 +16,31 @@ class HomeView extends Component {
   }
   addMessage = () => {
     if(this.state.message.length > 0) {
-      const arr = [...this.state.currentMessages, this.state.message];
-      this.setState({
-        currentMessages: arr
-      });
+      const arr = this.state.currentMessages;
+      arr.push({user: this.state.name, message: this.state.message});
       this.setState({
         message: ''
       });
-      localStorage.setItem('messages', arr);
-      
-      
+      localStorage.setItem('messages', JSON.stringify(arr));
     }
+  }
+  setMessages = () => {
+    const localStData = localStorage.getItem('messages');
+    const temp = localStData ? JSON.parse(localStData) : [];
+    this.setState({
+      currentMessages: temp,
+    });
   }
   componentDidMount() {
     const sessionData = sessionStorage.getItem('user');
     if(!sessionData) this.props.history.push('/login');
     else {
+      window.addEventListener('storage',(e)=>{
+        this.setMessages();
+      });
       this.setState({
         name: sessionData
       });
-      const localStData = localStorage.getItem('messages');
-      const temp = JSON.parse(JSON.stringify(localStData));
     }
   }
   render() {
@@ -48,7 +52,12 @@ class HomeView extends Component {
             <div className='body'>
               <div className='messages-container'>
                 {
-                  this.state.currentMessages.map((message, index) => <div key={index} className="message-item">{message}</div>)
+                  Array.isArray(this.state.currentMessages) ?
+                    this.state.currentMessages.map((data, index) => <div key={index} className="message-block">
+                        <div className="message-sender">{data.user}</div>
+                        <div className="message-item">{data.message}</div>
+                      </div>)
+                    : null
                 }
               </div>
             </div>
@@ -63,4 +72,4 @@ class HomeView extends Component {
   }
 }
 
-export default withRouter(HomeView);
+export default withRouter(HomeView)
