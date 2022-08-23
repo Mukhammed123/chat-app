@@ -4,7 +4,10 @@
   justify-content: center;
   align-items: center;
 }
-
+#body-container {
+  height: 743px;
+  overflow: auto;
+}
 .body {
   min-height: 740px;
   transform: rotate(180deg);
@@ -17,7 +20,6 @@
   border: 1px solid black;
   width: 350px;
   height: 800px;
-  overflow: auto;
 }
 .top-bar {
   height: 10px;

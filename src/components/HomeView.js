@@ -23,7 +23,14 @@ class HomeView extends Component {
         message: ''
       });
       localStorage.setItem('messages', JSON.stringify(arr));
+
+      this.scrollBottom();
     }
+  }
+  scrollBottom = () => {
+    const myDiv = document.getElementById("body-container");
+    console.log(myDiv)
+    myDiv.scrollTo(0, myDiv.scrollHeight + 60);
   }
   setMessages = () => {
     const localStData = localStorage.getItem('messages');
@@ -32,7 +39,7 @@ class HomeView extends Component {
       currentMessages: temp,
     });
   }
-  componentDidMount() {
+  async componentDidMount() {
     const sessionData = sessionStorage.getItem('user');
     if(!sessionData) this.props.history.push('/login');
     else {
@@ -42,6 +49,8 @@ class HomeView extends Component {
       this.setState({
         name: sessionData
       });
+      await this.setMessages();
+      this.scrollBottom();
     }
   }
   render() {
@@ -50,23 +59,25 @@ class HomeView extends Component {
         <div className='messenger'>
           <div className='messenger-block'>
             <div className='top-bar'></div>
-            <div className='body'>
-              <div className='messages-container'>
-                {
-                  Array.isArray(this.state.currentMessages) ?
-                    this.state.currentMessages.map((data, index) => <div 
-                        key={index} 
-                        className="message-block"
-                      >
-                        <div className="message-sender" style={{textAlign: data.user === this.state.name ? 'end' : 'start'}}>{data.user}</div>
-                        <div className='message-content' style={{justifyContent: data.user === this.state.name ? 'flex-end' : 'flex-start'}}>
-                          <div className={`message-item ${data.user === this.state.name ? 'user-sent' : ''}`}>{data.message}</div>
+            <div id='body-container'>
+              <div className='body'>
+                <div className='messages-container'>
+                  {
+                    Array.isArray(this.state.currentMessages) ?
+                      this.state.currentMessages.map((data, index) => <div 
+                          key={index} 
+                          className="message-block"
+                        >
+                          <div className="message-sender" style={{textAlign: data.user === this.state.name ? 'end' : 'start'}}>{data.user}</div>
+                          <div className='message-content' style={{justifyContent: data.user === this.state.name ? 'flex-end' : 'flex-start'}}>
+                            <div className={`message-item ${data.user === this.state.name ? 'user-sent' : ''}`}>{data.message}</div>
+                          </div>
+                          <span className='message-time'>{data.sent_at}</span>
                         </div>
-                        <span className='message-time'>{data.sent_at}</span>
-                      </div>
-                      )
-                    : null
-                }
+                        )
+                      : null
+                  }
+                </div>
               </div>
             </div>
             <div className='bottom-bar'>
